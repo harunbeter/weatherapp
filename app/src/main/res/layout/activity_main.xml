@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.beytullah.weatherapp.view.WeatherViewModel"
+            />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@color/colorBackGround">
+
+        <Button
+            android:id="@+id/fetchWeatherButton"
+            android:layout_width="366dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="16dp"
+            android:textStyle="bold"
+            android:background="@drawable/buttoncolor"
+            android:textColor="@color/colorBackGround"
+            android:text="Get Weather" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/weatherList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fetchWeatherButton"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:background="@drawable/layout_liner"
+
+            android:visibility="invisible"
+            tools:listitem="@layout/list_item" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dailyWeatherList"
+            android:layout_width="wrap_content"
+            android:layout_height="339dp"
+            android:layout_below="@id/weatherList"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:visibility="visible"
+            android:background="@drawable/layout_liner"
+            tools:listitem="@layout/daily_list_item" />
+
+        <ProgressBar
+            android:id="@+id/pBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</layout>

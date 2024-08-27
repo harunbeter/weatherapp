@@ -101,9 +101,6 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = View.GONE
                 binding.weatherList.visibility = View.VISIBLE
             }
-
-
-
         })
 
         binding.fetchWeatherButton.setOnClickListener {
@@ -112,7 +109,6 @@ class MainActivity : AppCompatActivity() {
             temperatureListMax.clear()
             dailyAdapter.notifyDataSetChanged()
             viewModel.fetchDailyWeather(39.0, 35.0)
-
         }
     }
 

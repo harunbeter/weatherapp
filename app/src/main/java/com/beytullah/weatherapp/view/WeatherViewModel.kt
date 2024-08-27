@@ -7,13 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.beytullah.weatherapp.api.WeatherApi
 import com.beytullah.weatherapp.model.DailyWeatherResponse
 import com.beytullah.weatherapp.model.WeatherResponse
+import com.beytullah.weatherapp.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class WeatherViewModel @Inject constructor(private val weatherApi: WeatherApi) : ViewModel() {
+class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository) : ViewModel() {
 
     private val _weatherData = MutableLiveData<Response<WeatherResponse>>()
     val weatherData: LiveData<Response<WeatherResponse>> get() = _weatherData
@@ -31,7 +32,7 @@ class WeatherViewModel @Inject constructor(private val weatherApi: WeatherApi) :
         viewModelScope.launch {
             try {
                 _isLoading.postValue(true)
-                val response : Response<WeatherResponse> = weatherApi.getWeather(latitude, longitude, "temperature_2m")
+                val response : Response<WeatherResponse> = weatherRepository.getWeather(latitude, longitude, "temperature_2m")
                 if (!response.isSuccessful) {
                     _exceptionMessage.postValue(response.message())
                     return@launch
@@ -49,7 +50,7 @@ class WeatherViewModel @Inject constructor(private val weatherApi: WeatherApi) :
     fun fetchDailyWeather(latitude: Double, longitude: Double) {
         val list =  listOf("temperature_2m_min","temperature_2m_max")
         viewModelScope.launch {
-            val data = weatherApi.getDailyWeather(latitude, longitude, list)
+            val data = weatherRepository.getDailyWeather(latitude, longitude, list)
             if (data != null) {
                 _dailyWeatherData.postValue(data)
             }
